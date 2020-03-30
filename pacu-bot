@@ -1,0 +1,37 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+
+spawn python3 pacu.py
+
+expect "*What would you like to name this new session?*"
+
+send -- "pacu-bot\n"\
+
+expect "*Session pacu-bot created*"
+
+send -- "set_keys\n"
+
+expect "*Setting AWS Keys*"
+
+send -- "pacu-bot\n"
+
+expect "Access key ID*"
+
+send -- "$env(AWS_ACCESS_KEY_ID)\n"
+
+expect "Secret access key*"
+
+send -- "$env(AWS_SECRET_ACCESS_KEY)\n"
+
+expect "Session token*"
+
+send -- "$env(AWS_SESSION_TOKEN)\n"
+
+expect "*Keys saved to database*"
+
+send -- "load_commands_file pacu-commands\n"
+
+send -- "exit\n"
+
+expect eof

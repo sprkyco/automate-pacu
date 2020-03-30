@@ -1,0 +1,3 @@
+run iam__enum_users_roles_policies_groups
+run iam__enum_permissions --all-users --all-roles
+run iam__privesc_scan --offline --scan-only
